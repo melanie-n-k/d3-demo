@@ -29,42 +29,46 @@ window.onload = function(){
 
     var arrayData = [10, 20, 30, 40, 50]; //random array of data
 
-    var cityPop = [  //example population array from module 2
+    var countyPop = [  //example population array from module 2
     {
-        city: 'Madison',
-        population: 233209
+        county: 'Florence',
+        population: 4354
     },
     {
-        city: 'Milwaukee',
-        population: 594833
+        county: 'Bayfield',
+        population: 15004
     },
     {
-        city: 'Green Bay',
-        population: 104057
+        county: 'Sauk',
+        population: 63340
     },
     {
-        city: 'Superior',
-        population: 27244
+        county: 'Walworth',
+        population: 102917
+    },
+    {
+        county: 'Waukesha',
+        population: 396731
     }
 ];
 
     var bubbles = container.selectAll(".bubbles") //empty selection of circles that don't yet exist
-        .data(cityPop) //feed in data from array
+        .data(countyPop) //feed in data from array
         .enter() //?
         .append("circle")
         .attr("class", "bubbles")
         .attr("id", function(d){
-          return d.city;
+          return d.county; //city attribute from array
         })
         .attr("r", function(d){
-          var area = d.population * 0.01;
-          return Math.sqrt(area/Math.PI); //circle radius
+          var area = d.population * 0.05; //population attribute from array
+          return Math.sqrt(area/Math.PI); //circle radius based on pop value
         })
         .attr("cx", function(d, i){
           return 90 + (i*180); //circle x position
         })
         .attr("cy", function(d){
-          return 450 - (d.population * 0.0005); // circle y position
+          return 450 - (d.population * 0.0005); // circle y position - largest population is highest up in rectangle
         })
         .style("fill","#A1FBFA");
 };
