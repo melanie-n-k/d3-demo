@@ -53,7 +53,7 @@ window.onload = function(){
 ];
 
     var x = d3.scaleLinear() //creates linear scale
-        .range([90, 810]) //min and max x coordinates
+        .range([90, 750]) //min and max x coordinates
         .domain([0, 4]); //input min and max - ie, number of steps on the scale?
         //scale will generate an output proportional to input, when passed a value
 
@@ -66,14 +66,19 @@ window.onload = function(){
     });
 
     var y = d3.scaleLinear()  //create linear scale for vertical axis
-        .range([440, 95])
-        .domain([
-          minPop,
-          maxPop
-        ]);
+        .range([450, 50])
+        .domain([0, 500000]);
 
-    var color = d3.scaleLinear()
-        .range([
+    var yAxis = d3.axisLeft(y); //generates y axis
+
+    var axis = container.append("g") //g is a group element
+        .attr("class", "axis")
+        .attr("transform", "translate(50, 0)")  //move axis into proper position on screen
+        .call(yAxis); //feeds the axis selection to the yAxis generator
+        //axis is styled in css because it's static (not dependent on changing data)
+
+    var color = d3.scaleLinear()  //create linear scale to generate color values
+        .range([  //range of colors as outputs
           "#92F7DF",
           "#92CFF7"
         ])
@@ -101,7 +106,44 @@ window.onload = function(){
           return y(d.population); // circle y position - largest population is highest up in rectangle
         })
         .style("fill",function(d,i){
-          return color(d.population);
+          return color(d.population); //fill is based on color scale
         })
-        .style("stroke", "#FFFFFF");
+        .style("stroke", "#FFFFFF");  //white stroke
+
+    var bubbleLabels = container.selectAll(".bubbleLabels")
+        .data(countyPop)
+        .enter()
+        .append("text")
+        .attr("class", "labels")
+        .attr("text-anchor", "left")
+        .attr("y", function(d){
+          return y(d.population) + 5;
+        });
+
+    var firstLine = bubbleLabels.append("tspan")
+        .attr("class", "firstLine")
+        .attr("x", function(d, i){
+          return x(i) + Math.sqrt(d.population * 0.01 / Math.PI) - 20;
+        })
+        .attr("dy", 25)
+        .text(function(d){
+          return d.county + ",";
+        });
+
+    var nextLine = bubbleLabels.append("tspan")
+        .attr("class", "nextLine")
+        .attr("x", function(d, i){
+          return x(i) + Math.sqrt(d.population * 0.01 / Math.PI) - 20;
+        })
+        .attr("dy", 15)
+        .text(function(d){
+          return "population " + d.population;
+        });
+
+    var chartTitle = container.append("text") // text element
+        .attr("class", "title") //the text element will serve as a title
+        .attr("text-anchor", "middle") //center the text
+        .attr("x", 450) //position it more precisely
+        .attr("y", 30)
+        .text("Wisconsin County Populations"); //the actual text in the title
 };
