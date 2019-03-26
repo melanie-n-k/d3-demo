@@ -15,6 +15,12 @@ window.onload = function(){
 
     //new block to add another element
     var insideRect = container.append("rectangle") //put rectangle inside main container (svg)
-        .attr("width", 800) //width of rectangle
-        .attr("height", 400) //height of rectangle
+        .datum(400)
+        .attr("width", function(d){
+          return d*2;
+        }) //width of rectangle is now based on datum (d) (doesn't have to be called d)
+        .attr("height", function(d){
+          return d;
+        }) //height of rectangle is also a function of datum
+        .style("background-color","#FA146E");
 };
