@@ -72,6 +72,16 @@ window.onload = function(){
           maxPop
         ]);
 
+    var color = d3.scaleLinear()
+        .range([
+          "#92F7DF",
+          "#92CFF7"
+        ])
+        .domain([
+          minPop,
+          maxPop
+        ]);
+
     var bubbles = container.selectAll(".bubbles") //empty selection of circles that don't yet exist
         .data(countyPop) //feed in data from array
         .enter() //?
@@ -90,5 +100,8 @@ window.onload = function(){
         .attr("cy", function(d){
           return y(d.population); // circle y position - largest population is highest up in rectangle
         })
-        .style("fill","#A1FBFA");
+        .style("fill",function(d,i){
+          return color(d.population);
+        })
+        .style("stroke", "#FFFFFF");
 };
