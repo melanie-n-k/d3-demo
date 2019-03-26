@@ -52,6 +52,26 @@ window.onload = function(){
     }
 ];
 
+    var x = d3.scaleLinear() //creates linear scale
+        .range([90, 810]) //min and max x coordinates
+        .domain([0, 4]); //input min and max - ie, number of steps on the scale?
+        //scale will generate an output proportional to input, when passed a value
+
+    var minPop = d3.min(countyPop, function(d){
+      return d.population; //finds minimum value of population array
+    });
+
+    var maxPop = d3.max(countyPop, function(d){
+      return d.population; //finds maximum value of array
+    });
+
+    var y = d3.scaleLinear()  //create linear scale for vertical axis
+        .range([440, 95])
+        .domain([
+          minPop,
+          maxPop
+        ]);
+
     var bubbles = container.selectAll(".bubbles") //empty selection of circles that don't yet exist
         .data(countyPop) //feed in data from array
         .enter() //?
@@ -65,10 +85,10 @@ window.onload = function(){
           return Math.sqrt(area/Math.PI); //circle radius based on pop value
         })
         .attr("cx", function(d, i){
-          return 90 + (i*180); //circle x position
+          return x(i); //circle x position
         })
         .attr("cy", function(d){
-          return 450 - (d.population * 0.0005); // circle y position - largest population is highest up in rectangle
+          return y(d.population); // circle y position - largest population is highest up in rectangle
         })
         .style("fill","#A1FBFA");
 };
