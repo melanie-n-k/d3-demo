@@ -117,7 +117,7 @@ window.onload = function(){
         .attr("class", "labels")
         .attr("text-anchor", "left")
         .attr("y", function(d){
-          return y(d.population) + 5;
+          return y(d.population) - 60;
         });
 
     var format = d3.format(","); // generates format for numbers
@@ -125,7 +125,7 @@ window.onload = function(){
     var firstLine = bubbleLabels.append("tspan")
         .attr("class", "firstLine")
         .attr("x", function(d, i){
-          return x(i) + Math.sqrt(d.population * 0.01 / Math.PI) - 20;
+          return x(i) + Math.sqrt(d.population * 0.01 / Math.PI) - 25;
         })
         .attr("dy", 25)
         .text(function(d){
@@ -135,7 +135,7 @@ window.onload = function(){
     var nextLine = bubbleLabels.append("tspan")
         .attr("class", "nextLine")
         .attr("x", function(d, i){
-          return x(i) + Math.sqrt(d.population * 0.01 / Math.PI) - 20;
+          return x(i) + Math.sqrt(d.population * 0.01 / Math.PI) - 25;
         })
         .attr("dy", 15)
         .text(function(d){
