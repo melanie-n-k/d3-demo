@@ -110,8 +110,8 @@ window.onload = function(){
         })
         .style("stroke", "#FFFFFF");  //white stroke
 
-    var bubbleLabels = container.selectAll(".bubbleLabels")
-        .data(countyPop)
+    var bubbleLabels = container.selectAll(".bubbleLabels") //create label element
+        .data(countyPop) //feed in data
         .enter()
         .append("text")
         .attr("class", "labels")
@@ -122,7 +122,7 @@ window.onload = function(){
 
     var format = d3.format(","); // generates format for numbers
 
-    var firstLine = bubbleLabels.append("tspan")
+    var firstLine = bubbleLabels.append("tspan") //break label into two lines - this is the first
         .attr("class", "firstLine")
         .attr("x", function(d, i){
           return x(i) + Math.sqrt(d.population * 0.01 / Math.PI) - 25;
@@ -132,7 +132,7 @@ window.onload = function(){
           return d.county;
         });
 
-    var nextLine = bubbleLabels.append("tspan")
+    var nextLine = bubbleLabels.append("tspan") //this is the second line 
         .attr("class", "nextLine")
         .attr("x", function(d, i){
           return x(i) + Math.sqrt(d.population * 0.01 / Math.PI) - 25;
