@@ -29,19 +29,42 @@ window.onload = function(){
 
     var arrayData = [10, 20, 30, 40, 50]; //random array of data
 
+    var cityPop = [  //example population array from module 2
+    {
+        city: 'Madison',
+        population: 233209
+    },
+    {
+        city: 'Milwaukee',
+        population: 594833
+    },
+    {
+        city: 'Green Bay',
+        population: 104057
+    },
+    {
+        city: 'Superior',
+        population: 27244
+    }
+];
+
     var bubbles = container.selectAll(".bubbles") //empty selection of circles that don't yet exist
-        .data(arrayData) //feed in data from array
+        .data(cityPop) //feed in data from array
         .enter() //?
         .append("circle")
         .attr("class", "bubbles")
-        .attr("r", function(d, i){
-          console.log("d:", d, "i:", i);
-          return d; //circle radius
+        .attr("id", function(d){
+          return d.city;
+        })
+        .attr("r", function(d){
+          var area = d.population * 0.01;
+          return Math.sqrt(area/Math.PI); //circle radius
         })
         .attr("cx", function(d, i){
-          return 70 + (i*180); //circle x position
+          return 90 + (i*180); //circle x position
         })
         .attr("cy", function(d){
-          return 450 - (d*5); // circle y position
-        });
+          return 450 - (d.population * 0.0005); // circle y position
+        })
+        .style("fill","#A1FBFA");
 };
