@@ -11,4 +11,5 @@ window.onload = function(){
         .attr("width", width) //assign width
         .attr("height", height) //assign height
         .attr("class", "container") //to use for future styling and selection
+        .style("background-color","#FAAEF4"); //semicolon at end of code block 
 };
