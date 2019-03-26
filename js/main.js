@@ -125,17 +125,17 @@ window.onload = function(){
     var firstLine = bubbleLabels.append("tspan") //break label into two lines - this is the first
         .attr("class", "firstLine")
         .attr("x", function(d, i){
-          return x(i) + Math.sqrt(d.population * 0.01 / Math.PI) - 25;
+          return x(i) + Math.sqrt(d.population * 0.01 / Math.PI) - 30;
         })
         .attr("dy", 25)
         .text(function(d){
           return d.county;
         });
 
-    var nextLine = bubbleLabels.append("tspan") //this is the second line 
+    var nextLine = bubbleLabels.append("tspan") //this is the second line
         .attr("class", "nextLine")
         .attr("x", function(d, i){
-          return x(i) + Math.sqrt(d.population * 0.01 / Math.PI) - 25;
+          return x(i) + Math.sqrt(d.population * 0.01 / Math.PI) - 30;
         })
         .attr("dy", 15)
         .text(function(d){
