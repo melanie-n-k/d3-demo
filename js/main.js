@@ -11,5 +11,10 @@ window.onload = function(){
         .attr("width", width) //assign width
         .attr("height", height) //assign height
         .attr("class", "container") //to use for future styling and selection
-        .style("background-color","#FAAEF4"); //semicolon at end of code block 
+        .style("background-color","#FAAEF4"); //semicolon at end of code block
+
+    //new block to add another element
+    var insideRect = container.append("rectangle") //put rectangle inside main container (svg)
+        .attr("width", 800) //width of rectangle
+        .attr("height", 400) //height of rectangle
 };
