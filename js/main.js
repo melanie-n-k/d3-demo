@@ -120,6 +120,8 @@ window.onload = function(){
           return y(d.population) + 5;
         });
 
+    var format = d3.format(","); // generates format for numbers
+
     var firstLine = bubbleLabels.append("tspan")
         .attr("class", "firstLine")
         .attr("x", function(d, i){
@@ -127,7 +129,7 @@ window.onload = function(){
         })
         .attr("dy", 25)
         .text(function(d){
-          return d.county + ",";
+          return d.county;
         });
 
     var nextLine = bubbleLabels.append("tspan")
@@ -137,7 +139,7 @@ window.onload = function(){
         })
         .attr("dy", 15)
         .text(function(d){
-          return "population " + d.population;
+          return "pop. " + format(d.population);
         });
 
     var chartTitle = container.append("text") // text element
